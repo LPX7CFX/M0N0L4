@@ -2,19 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class MenuController : MonoBehaviour
 {
-    [Header("Volume Setting")]
-    [SerializeField] private TMP_Text volumeTextValue = null;
-    [SerializeField] private Slider volumeSlider = null;
-
-    [Header("Confirmation")]
-    [SerializeField] private GameObject comfirmationPrompt = null;
-
-
     [Header("Levels To Load")]
     public string Game1;
     public string Game2;
@@ -81,20 +74,20 @@ public class MenuController : MonoBehaviour
     {
         Application.Quit();
     }
-    public void SetVolume(float volume)
+
+    public Slider masterVol, musicVol, sfxVol;
+    public AudioMixer mainAudioMixer;
+
+    public void ChangeMasterVolume()
     {
-        AudioListener.volume = volume;
-        volumeTextValue.text = volume.ToString("0.0");
+        mainAudioMixer.SetFloat("MainVol", masterVol.value);
     }
-    public void VolumeApply()
+    public void ChangeMusicVolume()
     {
-        PlayerPrefs.SetFloat("masterVolume",AudioListener.volume);
-        StartCoroutine(ConfirmationBox());
+        mainAudioMixer.SetFloat("MusicVol", musicVol.value);
     }
-    public IEnumerator ConfirmationBox()
+    public void ChangeSFXVolume()
     {
-        comfirmationPrompt.SetActive(true);
-        yield return new WaitForSeconds(2);
-        comfirmationPrompt.SetActive(false);
+        mainAudioMixer.SetFloat("SFXVol", sfxVol.value);
     }
 }
