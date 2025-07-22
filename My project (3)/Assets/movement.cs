@@ -4,6 +4,7 @@ using TMPro;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine.TextCore.Text;
+using UnityEditor.SceneManagement;
 public class CommandSystem : MonoBehaviour
 
 {
@@ -51,8 +52,6 @@ public class CommandSystem : MonoBehaviour
             default:
                 resultText.text = "Unknown command";
                 break;
-
-
         }
     }
 }

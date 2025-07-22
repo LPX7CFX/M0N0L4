@@ -16,14 +16,14 @@ public class BrownAreaInteraction : MonoBehaviour
         {
             brownPopup.SetActive(true);
             Debug.Log("Check");
-            hasChecked = true; // ตั้งค่า flag เป็น true เมื่อผู้เล่น check
+            hasChecked = true;
         }
     }
 
     public void OnSubmitCommand()
     {
         string command = inputField.text.Trim().ToLower();
-        if (command == "enter" && hasChecked) // ตรวจสอบทั้งคำสั่งและ flag
+        if (command == "enter" && hasChecked)
         {
             SceneManager.LoadScene("Game2");
         }
